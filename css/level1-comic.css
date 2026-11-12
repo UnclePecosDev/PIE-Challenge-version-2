@@ -1,0 +1,408 @@
+/* Comic panels for Level 1 / Questions 1–3. Side artwork is decorative only.
+   All labels, letter tiles, controls, scoring and question data stay interactive. */
+#gameView.level1-comic-scene {position:relative;isolation:isolate;min-height:660px}
+#gameView .level1-side-art {position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:18px;overflow:hidden;background:linear-gradient(120deg,#0068da,#00cafa 54%,#214ed8);border:4px solid #101b33;box-shadow:6px 8px 0 #101b33}
+#gameView .level1-side-left,#gameView .level1-side-right {position:absolute;top:0;bottom:0;width:29%;background-position:center;background-size:cover;filter:saturate(1.1);animation:comicFloat 7s ease-in-out infinite alternate}
+#gameView .level1-side-left{left:0;background-position:right center}
+#gameView .level1-side-right{right:0;background-position:left center;animation-delay:-3.5s}
+@keyframes comicFloat {from {transform:scale(1.01)}to {transform:scale(1.055)}}
+#gameView.level1-comic-scene .game-top,#gameView.level1-comic-scene .progress-track {position:relative;z-index:2;max-width:760px;margin-left:auto;margin-right:auto}
+#gameView.level1-comic-scene .game-top{background:#034461;border:4px solid #0e1933;border-radius:13px;box-shadow:4px 5px #10182a;padding:9px 12px;margin-top:12px}
+#gameView.level1-comic-scene .game-top .secondary-btn {background:#ffda18;color:#111a2b}
+#gameView.level1-comic-scene .game-progress{color:#101a2e;background:#fff}
+#gameView.level1-comic-scene .progress-track{margin-top:12px;margin-bottom:12px;background:#123b61}
+#gameView.level1-comic-scene .question-card {position:relative;z-index:2;width:min(760px,68%);max-width:760px;margin:0 auto 22px;border:5px solid #111a35;border-radius:25px;background:linear-gradient(150deg,#fff,#f5f9ff 75%,#eaf6ff);box-shadow:7px 9px #101426;padding:24px 20px;color:#13223c}
+#gameView.level1-comic-scene .question-badge{color:#14162f;background:#ffdf25;font-size:17px;padding:7px 25px;border-radius:50px;box-shadow:3px 4px #0e1c31}
+#gameView.level1-comic-scene #questionTitle {font-size:clamp(27px,3.3vw,48px);font-style:italic;margin:13px 0 7px;line-height:1}
+#gameView.level1-comic-scene #questionDescription {font-size:clamp(13px,1.6vw,18px);color:#23344d;font-weight:900;line-height:1.35}
+#gameView.level1-comic-scene .question-image{max-width:460px;height:128px;background:#c9efff;object-fit:contain;border:4px solid #114669;box-shadow:3px 5px #111d35;padding:5px}
+#gameView.level1-comic-scene .question-content{margin:17px 0 9px}
+#gameView.level1-comic-scene .answer-slots{background:#003a55;border:3px solid #0a1b32;min-height:63px;margin:8px auto 12px;color:#fff}
+#gameView.level1-comic-scene .slot-placeholder{color:#e0f6ff}
+#gameView.level1-comic-scene .letter-grid{max-width:410px;gap:6px;grid-template-columns:repeat(6,minmax(0,1fr))}
+#gameView.level1-comic-scene .letter-tile{font-size:20px;border-radius:9px;min-width:0}
+#gameView.level1-comic-scene .letter-actions{margin-top:15px}
+#gameView.level1-comic-scene .game-actions{margin-top:10px}
+#gameView.level1-comic-scene #checkBtn,#gameView.level1-comic-scene #nextBtn{background:linear-gradient(#ffe925,#ffbe00);color:#10182b;text-shadow:none}
+#gameView.level1-comic-scene #hintBtn{background:#7020dc;color:#fff;border:3px solid #15132e}
+@media(max-width:980px){
+ #gameView.level1-comic-scene .question-card{width:76%;padding:20px 12px}
+ #gameView .level1-side-left,#gameView .level1-side-right{width:20%}
+}
+@media(max-width:680px){
+ #gameView.level1-comic-scene .question-card{width:96%;padding:19px 9px;background:rgba(255,255,255,.97)}
+ #gameView.level1-comic-scene .game-top,#gameView.level1-comic-scene .progress-track{width:96%}
+ #gameView .level1-side-left,#gameView .level1-side-right{width:32%;opacity:.4;filter:blur(1px)}
+ #gameView.level1-comic-scene #questionDescription{font-size:13px}
+ #gameView.level1-comic-scene .letter-grid{max-width:370px}
+}
+@media(prefers-reduced-motion:reduce){#gameView .level1-side-left,#gameView .level1-side-right{animation:none}}
+
+
+/* ==========================================
+   PIE CHALLENGE - LEVEL 1 QUESTION 1
+   FULLSCREEN COMIC BACKGROUND
+========================================== */
+
+/* Full-screen game area */
+body:has(#gameView.active) {
+ min-height: 100vh;
+ background: #16b5ef;
+ overflow-x: hidden;
+}
+
+/* Remove the narrow page container */
+body:has(#gameView.active) .container {
+ width: 100% !important;
+ max-width: none !important;
+ margin: 0 !important;
+ padding: 0 !important;
+}
+
+/* Full-width game section */
+#gameView.active {
+ width: 100% !important;
+ max-width: none !important;
+ min-height: 100vh;
+ margin: 0 auto;
+ padding: 20px 15px 45px;
+
+ background-color: #099ce8;
+ background-size: cover;
+ background-position: center;
+ background-repeat: no-repeat;
+}
+
+/* Game navigation header */
+#gameView .game-top {
+ position: relative;
+ z-index: 2;
+
+ width: min(100%, 900px);
+ margin: 0 auto 18px;
+
+ padding: 15px 20px;
+ border-radius: 16px;
+ background: #034663;
+ border: 3px solid #001b35;
+}
+
+/* Main white game platform */
+#gameView .question-card {
+ position: relative;
+ z-index: 2;
+
+ width: min(100%, 700px) !important;
+ max-width: none !important;
+
+ margin: 0 auto;
+ padding: 30px 35px;
+
+ background: linear-gradient(
+         160deg,
+         #ffffff 0%,
+         #f1f7ff 100%
+ );
+
+ border: 4px solid #062846;
+ border-radius: 28px;
+
+ box-shadow:
+         8px 10px 0 rgba(0, 30, 60, 0.35),
+         0 15px 35px rgba(0, 0, 0, 0.2);
+
+ color: #08263b;
+}
+
+/* Question heading */
+#gameView .question-card h2 {
+ color: #07334f;
+ font-size: clamp(26px, 3vw, 42px);
+ font-weight: 900;
+ text-shadow: none;
+}
+
+/* Question description */
+#gameView #questionDescription {
+ color: #103b59;
+ font-weight: 700;
+ font-size: 17px;
+}
+
+/* Image inside question */
+#gameView .question-image {
+ width: 100%;
+ max-width: 470px;
+ height: 190px;
+ object-fit: contain;
+ border-radius: 15px;
+}
+
+/* Letters grid */
+#gameView .letter-grid {
+ width: 100%;
+ max-width: 520px;
+ margin: 0 auto;
+ gap: 9px;
+}
+
+/* Letters */
+#gameView .letter-tile {
+ font-size: 23px;
+ border-radius: 10px;
+}
+
+/* Answer area */
+#gameView .answer-slots {
+ width: 100%;
+ max-width: 570px;
+ min-height: 70px;
+ background: #03415a;
+ border: 2px solid #0d7998;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+ #gameView.active {
+  padding: 12px 8px 35px;
+  background-position: center;
+ }
+
+ #gameView .question-card {
+  width: 96% !important;
+  padding: 20px 12px;
+ }
+
+ #gameView .game-top {
+  width: 96%;
+  padding: 10px;
+ }
+
+ #gameView .question-image {
+  height: 150px;
+ }
+
+ #gameView .letter-tile {
+  font-size: 18px;
+ }
+}
+
+/* ============================================================
+   LEVEL 1 BACKGROUND FIX — automatically linked to app.js
+   app.js adds level1-comic-scene and data-comic-question="1/2/3".
+   Preserve these selectors, image paths and the original JS.
+   ============================================================ */
+body:has(#gameView.active.level1-comic-scene) {
+ background: #079fe7;
+ overflow-x: hidden;
+}
+body:has(#gameView.active.level1-comic-scene) > .container {
+ width: 100% !important;
+ max-width: none !important;
+ margin: 0 !important;
+ padding: 0 !important;
+}
+#gameView.active.level1-comic-scene {
+ position: relative;
+ isolation: isolate;
+ min-height: 100vh;
+ width: 100% !important;
+ max-width: none !important;
+ margin: 0 !important;
+ padding: 20px 15px 50px !important;
+ background-color: #079fe7;
+ background-repeat: no-repeat !important;
+ background-position: center center !important;
+ background-size: cover !important;
+}
+#gameView.active.level1-comic-scene[data-comic-question="1"] {
+ background-image: url("../images/level1-bg-q1.webp") !important;
+}
+#gameView.active.level1-comic-scene[data-comic-question="2"] {
+ background-image: url("../images/level1-bg-q2.webp") !important;
+}
+#gameView.active.level1-comic-scene[data-comic-question="3"] {
+ background-image: url("../images/level1-bg-q3.webp") !important;
+}
+#gameView.level1-comic-scene > .level1-side-art,
+#gameView.level1-comic-scene > .entrepreneur-backdrop {
+ display: none !important;
+}
+#gameView.level1-comic-scene .question-card {
+ width: min(700px, 95%) !important;
+ max-width: 700px !important;
+ margin: 16px auto 26px !important;
+ background: rgba(255,255,255,.97) !important;
+ border: 5px solid #10152e;
+ border-radius: 24px;
+ box-shadow: 8px 10px 0 #10152e;
+ padding: 24px 24px;
+ position: relative;
+ z-index: 2;
+}
+#gameView.level1-comic-scene .game-top,
+#gameView.level1-comic-scene .progress-track {
+ position: relative;
+ z-index: 2;
+ width: min(900px, 96%) !important;
+ max-width: 900px;
+ margin-left: auto !important;
+ margin-right: auto !important;
+}
+@media(max-width:700px) {
+ #gameView.active.level1-comic-scene {
+  padding: 12px 7px 35px !important;
+  background-position: center center !important;
+ }
+ #gameView.level1-comic-scene .question-card {
+  width: 97% !important;
+  padding: 16px 10px !important;
+ }
+}
+
+/* =====================================
+   LEVEL 1 — BIG QUESTION IMAGE
+===================================== */
+
+#gameView.level1-comic-scene .question-image {
+ display: block;
+
+ width: 100% !important;
+ max-width: 100% !important;
+ height: 280px !important;
+
+ object-fit: cover !important;
+ object-position: center;
+
+ padding: 0 !important;
+ margin: 0 auto;
+
+ background: #d9f4ff;
+
+ border: 4px solid #114669;
+ border-radius: 15px;
+
+ box-shadow: 3px 5px 0 #111d35;
+}
+
+/* Image container */
+#gameView.level1-comic-scene .game-picture {
+ width: 100%;
+ max-width: 650px;
+ margin: 15px auto;
+}
+
+/* Mobile */
+@media (max-width: 680px) {
+ #gameView.level1-comic-scene .question-image {
+  height: 200px !important;
+ }
+}
+/* ==========================================
+   LEVEL 1 — BIG WHITE LETTER PANEL
+========================================== */
+
+/* Cadre principal: bleu -> blanc */
+#gameView.level1-comic-scene .letter-game-center {
+ width: 100% !important;
+ max-width: 750px !important;
+ min-height: 480px;
+
+ margin: 15px auto 0 !important;
+ padding: 30px 20px 115px !important;
+
+ background: #ffffff !important;
+ border: 4px solid #102b45;
+ border-radius: 22px;
+
+ display: flex !important;
+ align-items: center !important;
+ justify-content: center !important;
+
+ box-shadow: 5px 7px 0 #102b45;
+}
+
+/* Grille des lettres */
+#gameView.level1-comic-scene .letter-grid {
+ display: grid !important;
+
+ grid-template-columns: repeat(6, 70px) !important;
+ gap: 12px !important;
+
+ width: max-content !important;
+ max-width: 100% !important;
+
+ margin: 0 auto !important;
+ justify-content: center !important;
+ align-content: center !important;
+
+ background: transparent !important;
+}
+
+/* Carrés des lettres plus grands */
+#gameView.level1-comic-scene .letter-tile {
+ width: 70px !important;
+ height: 70px !important;
+
+ min-width: 0 !important;
+ padding: 0 !important;
+
+ font-size: 29px !important;
+ font-weight: 900 !important;
+
+ border: 3px solid #102b45;
+ border-radius: 12px;
+
+ box-shadow: 0 5px 0 #102b45;
+}
+
+/* Boutons à l'intérieur du cadre */
+#gameView.level1-comic-scene .letter-actions {
+ position: relative;
+ z-index: 3;
+
+ display: flex !important;
+ align-items: center;
+ justify-content: center;
+ flex-wrap: wrap;
+ gap: 15px;
+
+ margin: -90px auto 35px !important;
+ padding: 0 12px;
+}
+
+/* Boutons plus grands */
+#gameView.level1-comic-scene .letter-actions button {
+ padding: 14px 22px !important;
+ font-size: 21px !important;
+ border-radius: 12px;
+}
+
+/* Mobile */
+@media (max-width: 680px) {
+ #gameView.level1-comic-scene .letter-game-center {
+  min-height: 350px;
+  padding: 20px 10px 95px !important;
+ }
+
+ #gameView.level1-comic-scene .letter-grid {
+  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  width: 100% !important;
+  gap: 5px !important;
+ }
+
+ #gameView.level1-comic-scene .letter-tile {
+  width: 100% !important;
+  height: 48px !important;
+  font-size: 19px !important;
+ }
+
+ #gameView.level1-comic-scene .letter-actions {
+  margin-top: -75px !important;
+ }
+
+ #gameView.level1-comic-scene .letter-actions button {
+  font-size: 15px !important;
+  padding: 10px 12px !important;
+ }
+}

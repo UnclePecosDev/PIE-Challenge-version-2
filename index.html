@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PIE Challenge — Intro</title>
+<style>
+:root{font-family:Impact,'Arial Black',system-ui,sans-serif;color:#fff}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:#060d22;overflow:hidden}
+#vid{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#050812}
+#vid-bg{position:absolute;inset:0;background:radial-gradient(circle at 50% 30%,#1277d0 0%,#081535 45%,#040816 100%);z-index:-1}
+#gate{position:absolute;inset:0;display:grid;place-items:center;background:radial-gradient(circle at 50% 50%,#123eb6aa,#040519ed);z-index:4}
+#gate.hide{display:none}.intro-card{text-align:center;padding:32px 24px;max-width:620px;width:90%;border:5px solid #101322;border-radius:25px;box-shadow:12px 12px #000,0 0 80px #1d9fff65;background:repeating-radial-gradient(circle at 20% 20%,#1b7bea 0 1px,transparent 2px 12px),linear-gradient(135deg,#0354ad,#5723a8)}
+.eyebrow{background:#ffdc2d;color:#080a12;display:inline-block;padding:7px 14px;transform:rotate(-2deg);border:3px solid #111;font:900 12px system-ui}.logo{font-size:clamp(48px,10vw,100px);font-style:italic;line-height:1;text-shadow:5px 6px #121322,-3px -3px #121322;-webkit-text-stroke:2px #121322;color:#ffdd24;margin:22px 0 0}.sublogo{color:#fff;font-size:clamp(27px,6vw,60px);letter-spacing:-2px;transform:rotate(-5deg);text-shadow:5px 6px #100b1c,-3px -3px #100b1c;margin:-5px 0 15px}p{font:700 14px system-ui;margin:10px 0 23px;color:#fff}
+button{cursor:pointer;font-family:Impact,'Arial Black',system-ui;font-weight:900;border:3px solid #0c0b11;transition:transform .15s}
+button:hover{transform:translateY(-3px) scale(1.025)}.start{background:#ed1839;color:white;font-size:clamp(19px,4vw,29px);padding:15px 35px;border-radius:14px;box-shadow:0 7px #79081a;text-shadow:2px 2px #080509}.controls{position:fixed;bottom:25px;right:25px;display:flex;gap:10px;z-index:3}.controls button{padding:13px 17px;border-radius:12px;background:#ffdd26;color:#111;font-size:15px;box-shadow:0 5px #b98a0f}.controls button.mute{background:#eee;color:#111}.tip{position:fixed;top:22px;left:22px;font:800 12px system-ui;background:#071427b5;padding:10px 15px;border:1px solid #ffffff55;border-radius:10px;z-index:2}#loading{font:600 12px system-ui;opacity:.8;margin-top:14px}
+@media(max-width:600px){.controls{bottom:15px;right:15px}.controls button{font-size:12px;padding:11px}.intro-card{padding:24px 14px}}
+</style></head><body>
+<div id="vid-bg"></div><video id="vid" playsinline preload="auto"><source src="videos/intro.mp4" type="video/mp4">Vidéo non prise en charge.</video>
+<div class="tip">🎬 PIE CHALLENGE — VIDEO INTRO</div>
+<div id="gate"><div class="intro-card"><div class="eyebrow">OFPPT — INNOVATION & ENTREPRENEURIAT</div><div class="logo">PIE</div><div class="sublogo">CHALLENGE!</div><p>Prêt à relever le défi ? L'aventure commence ici.</p><button class="start" id="launch">▶ LANCER AVEC LE SON</button><div id="loading">Clique pour démarrer la vidéo avec son audio original</div></div></div>
+<div class="controls"><button class="mute" id="sound" aria-label="Activer ou couper le son">🔊 SON</button><button id="skip">PASSER L'INTRO ➜</button></div>
+<script>
+const v=document.getElementById('vid'), gate=document.getElementById('gate'), sound=document.getElementById('sound');
+function finish(){window.location.replace('game.html')}
+async function launch(){try{v.muted=false;v.volume=1;await v.play();gate.classList.add('hide');sound.textContent='🔊 SON'}catch(e){document.getElementById('loading').textContent='Impossible de lire la vidéo. Essaie Chrome ou utilise PASSER L’INTRO.';console.error(e)}}
+document.getElementById('launch').addEventListener('click',launch);
+document.getElementById('skip').addEventListener('click',finish);
+v.addEventListener('ended',finish);
+v.addEventListener('error',()=>{document.getElementById('loading').textContent='Vidéo introuvable ou format non compatible. Le bouton PASSER fonctionne.'});
+sound.addEventListener('click',()=>{v.muted=!v.muted;sound.textContent=v.muted?'🔇 MUET':'🔊 SON'});
+</script></body></html>

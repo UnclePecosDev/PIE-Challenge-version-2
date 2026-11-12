@@ -1,0 +1,315 @@
+/* PIE CHALLENGE — ENTREPRENEUR LEVEL THEMES (LEVEL 2–7)
+   Uses only the six entrepreneur portraits supplied by the user.
+   No gameplay logic is changed by this stylesheet.
+*/
+
+/* Each level has its own vibrant comic-book palette */
+#gameView[class*="pie-theme-level-"],
+#examView.pie-theme-level-6 {
+    --comic-blue: #06a9ef;
+    --comic-purple: #713ce0;
+    --comic-yellow: #ffdc23;
+    --portrait-left: none;
+    --portrait-right: none;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    min-height: 100vh;
+    padding: 22px 12px 65px;
+    background-color: var(--comic-blue);
+    background-image:
+      radial-gradient(circle at 51% 50%, #ffffffaa 0 10%, transparent 45%),
+      repeating-conic-gradient(from 0deg at 50% 48%, #ffffff18 0deg 10deg, #0048a832 10deg 19deg),
+      radial-gradient(#063a8b6a 1.5px, transparent 2px),
+      linear-gradient(125deg, var(--comic-blue), #2ad6ff 49%, var(--comic-purple));
+    background-size: auto, auto, 15px 15px, auto;
+}
+
+/* Portraits are decorative and never block the interactive UI */
+#gameView[class*="pie-theme-level-"]::before,
+#gameView[class*="pie-theme-level-"]::after,
+#examView.pie-theme-level-6::before,
+#examView.pie-theme-level-6::after {
+    content: "";
+    position: absolute;
+    top: 90px;
+    bottom: 30px;
+    width: min(27vw, 410px);
+    z-index: -1;
+    pointer-events: none;
+    background-position: center top;
+    background-size: contain;
+    background-repeat: no-repeat;
+    filter: drop-shadow(0 10px 16px #06184385);
+}
+#gameView[class*="pie-theme-level-"]::before,
+#examView.pie-theme-level-6::before {
+    left: 0;
+    background-image: var(--portrait-left);
+}
+#gameView[class*="pie-theme-level-"]::after,
+#examView.pie-theme-level-6::after {
+    right: 0;
+    background-image: var(--portrait-right);
+}
+
+/* Portrait references correspond to the 6 supplied images. */
+#gameView.pie-theme-level-2 {
+    --comic-blue: #008ce9; --comic-purple: #6332df;
+    --portrait-left: url('../images/entrepreneurs/portrait-5.webp');
+    --portrait-right: url('../images/entrepreneurs/portrait-8.webp');
+}
+#gameView.pie-theme-level-3 {
+    --comic-blue: #12ace7; --comic-purple: #9c38de;
+    --portrait-left: url('../images/entrepreneurs/portrait-3.webp');
+    --portrait-right: url('../images/entrepreneurs/portrait-2.webp');
+}
+#gameView.pie-theme-level-4 {
+    --comic-blue: #067ddb; --comic-purple: #5921b3;
+    --portrait-left: url('../images/entrepreneurs/portrait-7.webp');
+    --portrait-right: url('../images/entrepreneurs/portrait-6.webp');
+}
+#gameView.pie-theme-level-5 {
+    --comic-blue: #09b6d8; --comic-purple: #ee6b7b;
+    --portrait-left: url('../images/entrepreneurs/portrait-5.webp');
+}
+#examView.pie-theme-level-6 {
+    --comic-blue: #186dde; --comic-purple: #7846db;
+    --portrait-right: url('../images/entrepreneurs/portrait-6.webp');
+}
+#gameView.pie-theme-level-7 {
+    --comic-blue: #056add; --comic-purple: #9b47e2;
+    --portrait-left: url('../images/entrepreneurs/portrait-7.webp');
+    --portrait-right: url('../images/entrepreneurs/portrait-8.webp');
+}
+
+/* A full-width page makes room for portraits */
+body:has(#gameView.active[class*="pie-theme-level-"]) .container,
+body:has(#examView.active.pie-theme-level-6) .container {
+    width: 100%; max-width: none; margin: 0; padding: 0;
+}
+
+/* The existing question card remains real, clickable HTML */
+#gameView[class*="pie-theme-level-"] .game-top,
+#gameView[class*="pie-theme-level-"] .progress-track {
+    width: min(94%, 800px);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    z-index: 2;
+}
+#gameView[class*="pie-theme-level-"] .question-card {
+    position: relative;
+    z-index: 2;
+    width: min(64%, 800px);
+    max-width: 800px;
+    min-width: 570px;
+    margin: 0 auto 24px;
+    background: #fffcf7f5;
+    border: 5px solid #11142b;
+    border-radius: 24px;
+    box-shadow: 8px 9px 0 #11142b;
+    color: #12213b;
+}
+#gameView[class*="pie-theme-level-"] .question-badge {
+    background: #ffdf29;
+    color: #11162b;
+    border: 3px solid #11162b;
+    box-shadow: 3px 4px 0 #11162b;
+}
+#gameView[class*="pie-theme-level-"] #questionTitle { color: #082d4e; }
+#gameView[class*="pie-theme-level-"] #questionDescription { color: #163e57; }
+#gameView[class*="pie-theme-level-"] .game-top {
+    background: #063a61;
+    padding: 11px 16px;
+    border-radius: 13px;
+    border: 3px solid #11142b;
+}
+#gameView[class*="pie-theme-level-"] .game-top .secondary-btn { background: #ffdc23; }
+#gameView[class*="pie-theme-level-"] .game-progress { background: #ffffff; color: #13192a; }
+
+/* Level 6 has a separate embedded HTML exam, so frame it as a comic panel */
+#examView.pie-theme-level-6 > div { position: relative; z-index: 2; }
+#examView.pie-theme-level-6 iframe {
+    display: block;
+    width: min(65%, 820px) !important;
+    margin: 0 auto;
+    border: 5px solid #11142b !important;
+    background: white;
+    box-shadow: 7px 9px 0 #11142b;
+    border-radius: 18px !important;
+}
+
+/* Responsive, keep all answer buttons accessible */
+@media (max-width: 1100px) {
+  #gameView[class*="pie-theme-level-"] .question-card { width: 76%; min-width: 0; }
+  #gameView[class*="pie-theme-level-"]::before,
+  #gameView[class*="pie-theme-level-"]::after,
+  #examView.pie-theme-level-6::before,
+  #examView.pie-theme-level-6::after { width: 23vw; opacity: .73; }
+  #examView.pie-theme-level-6 iframe { width: 76% !important; }
+}
+@media (max-width: 680px) {
+  #gameView[class*="pie-theme-level-"] .question-card { width: 96%; padding: 18px 12px; }
+  #gameView[class*="pie-theme-level-"] .game-top,
+  #gameView[class*="pie-theme-level-"] .progress-track { width: 96%; }
+  #gameView[class*="pie-theme-level-"]::before,
+  #gameView[class*="pie-theme-level-"]::after,
+  #examView.pie-theme-level-6::before,
+  #examView.pie-theme-level-6::after { display: none; }
+  #examView.pie-theme-level-6 iframe { width: 98% !important; }
+}
+/* =====================================================
+   PIE CHALLENGE — LEVEL 2 LAYOUT CORRECTION
+   Uses actual app.js class: pie-theme-level-2
+   Add AFTER all earlier CSS rules.
+===================================================== */
+
+/* Give game more horizontal room. */
+body:has(#gameView.active.pie-theme-level-2) .container {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+#gameView.active.pie-theme-level-2 {
+  width: 100% !important;
+  max-width: none !important;
+  min-height: calc(100vh - 80px);
+  padding: 24px 16px 100px !important;
+  overflow: hidden;
+}
+
+/* Tall side portraits instead of small pictures at the top. */
+#gameView.pie-theme-level-2::before,
+#gameView.pie-theme-level-2::after {
+  top: 0 !important;
+  bottom: 0 !important;
+  height: 100% !important;
+  width: clamp(240px, 24vw, 450px) !important;
+  background-size: cover !important;
+  background-position: center top !important;
+  opacity: 1 !important;
+  filter: drop-shadow(0 7px 15px rgba(0,0,0,.28));
+}
+#gameView.pie-theme-level-2::before {left: 0 !important;}
+#gameView.pie-theme-level-2::after {right: 0 !important;}
+
+/* Enlarge the central panel so letters and buttons have room. */
+#gameView.pie-theme-level-2 .question-card {
+  width: min(1050px, calc(100% - 470px)) !important;
+  max-width: 1050px !important;
+  min-width: 0 !important;
+  padding: 28px 28px 35px !important;
+  margin: 18px auto 36px !important;
+  background: rgba(255, 255, 255, .97) !important;
+  border: 5px solid #11152e !important;
+  border-radius: 24px !important;
+  box-shadow: 8px 10px 0 #11152e !important;
+}
+#gameView.pie-theme-level-2 .game-top,
+#gameView.pie-theme-level-2 .progress-track {
+  width: min(1050px, calc(100% - 470px)) !important;
+  max-width: 1050px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+#gameView.pie-theme-level-2 #questionTitle {
+  font-size: clamp(29px, 3vw, 44px) !important;
+  margin: 12px auto 8px !important;
+}
+#gameView.pie-theme-level-2 #questionDescription {
+  font-size: 17px !important;
+  color: #173b56 !important;
+}
+
+/* The ABC icon is only decorative and wastes vertical space. */
+#gameView.pie-theme-level-2 .game-picture {display: none !important;}
+#gameView.pie-theme-level-2 .question-content {margin: 7px auto 12px !important;}
+
+/* Large centered answer slots and 6-column letter grid. */
+#gameView.pie-theme-level-2 .answer-slots {
+  width: min(100%, 750px) !important;
+  min-height: 72px !important;
+  margin: 14px auto !important;
+  background: #03415a !important;
+  color: #fff !important;
+  border-radius: 13px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+}
+#gameView.pie-theme-level-2 .letter-game-center {
+  width: min(100%, 780px) !important;
+  max-width: 780px !important;
+  min-height: 320px !important;
+  margin: 15px auto 0 !important;
+  padding: 22px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  background: #effaff !important;
+  border: 4px solid #102b45 !important;
+  border-radius: 20px !important;
+}
+#gameView.pie-theme-level-2 .letter-grid {
+  display: grid !important;
+  grid-template-columns: repeat(6, minmax(0, 72px)) !important;
+  gap: 10px !important;
+  width: max-content !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+  justify-content: center !important;
+  align-content: center !important;
+}
+#gameView.pie-theme-level-2 .letter-tile {
+  width: 72px !important;
+  height: 72px !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+  font-size: 29px !important;
+  font-weight: 900 !important;
+  border-radius: 12px !important;
+}
+#gameView.pie-theme-level-2 .letter-actions {
+  display: flex !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  gap: 14px !important;
+  margin: 18px auto 15px !important;
+}
+#gameView.pie-theme-level-2 .letter-actions button {
+  padding: 13px 22px !important;
+  font-size: 19px !important;
+  border-radius: 12px !important;
+}
+#gameView.pie-theme-level-2 .game-actions {margin: 20px auto 5px !important;}
+
+@media (max-width: 1250px) {
+  #gameView.pie-theme-level-2 .question-card,
+  #gameView.pie-theme-level-2 .game-top,
+  #gameView.pie-theme-level-2 .progress-track {
+    width: 75% !important;
+  }
+  #gameView.pie-theme-level-2::before,
+  #gameView.pie-theme-level-2::after {width: 26vw !important;}
+}
+@media (max-width: 760px) {
+  #gameView.pie-theme-level-2::before,
+  #gameView.pie-theme-level-2::after {display:none !important;}
+  #gameView.pie-theme-level-2 .question-card,
+  #gameView.pie-theme-level-2 .game-top,
+  #gameView.pie-theme-level-2 .progress-track {width: 96% !important;}
+  #gameView.pie-theme-level-2 .question-card {padding: 19px 10px !important;}
+  #gameView.pie-theme-level-2 .letter-game-center {padding: 12px 6px !important; min-height: 250px !important;}
+  #gameView.pie-theme-level-2 .letter-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+    gap: 5px !important;
+    width: 100% !important;
+  }
+  #gameView.pie-theme-level-2 .letter-tile {width: 100% !important; height: 45px !important; font-size: 18px !important;}
+  #gameView.pie-theme-level-2 .letter-actions button {font-size: 15px !important; padding: 10px 12px !important;}
+}

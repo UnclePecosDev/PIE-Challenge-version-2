@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIE Challenge | Comic Gaming Edition</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/comic.css">
+    <link rel="stylesheet" href="css/accueil.css">
+    <link rel="stylesheet" href="css/level1-comic.css">
+    <link rel="stylesheet" href="css/levels-entrepreneurs.css">
+    <link rel="stylesheet" href="css/levels-4-to-7-fix.css">
+    <link rel="stylesheet" href="css/pie-feedback.css">
+</head>
+
+<body>
+
+<header class="topbar">
+    <a href="#" class="logo" onclick="showView('home')">
+        ⚡ PIE <span>CHALLENGE!</span>
+    </a>
+
+    <div class="header-stats">
+        <span>🪙 <strong id="headerScore">0</strong> pts</span>
+        <span>🏆 <strong id="headerLevel">0/7</strong></span>
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- ACCUEIL — screenshot-inspired comic book experience. Clickable controls are real HTML. -->
+    <section id="homeView" class="view active">
+      <div class="reference-accueil" aria-label="Accueil PIE Challenge">
+        <img class="reference-scene" src="images/accueil-reference.webp" alt="Décor comic gaming avec héros, entrepreneuriat, créativité et innovation" fetchpriority="high">
+        <button class="scene-hit hit-profile" aria-label="Ouvrir mon profil" title="Profil" onclick="showView('profile')"><span>PROFIL</span></button>
+        <button class="scene-hit hit-settings" aria-label="Règles et aide" title="Aide" onclick="showView('help')"><span>AIDE</span></button>
+        <button class="scene-hit hit-play" aria-label="Jouer maintenant : choisir un niveau" title="Jouer" onclick="showView('levels')"><span>▶ PLAY!</span></button>
+        <button class="scene-hit hit-creativity" aria-label="Créativité : voir les niveaux" onclick="showView('levels')"><span>CRÉATIVITÉ</span></button>
+        <button class="scene-hit hit-innovation" aria-label="Innovation : voir les niveaux" onclick="showView('levels')"><span>INNOVATION</span></button>
+        <button class="scene-hit hit-entrepreneurship" aria-label="Entrepreneuriat : voir les niveaux" onclick="showView('levels')"><span>ENTREPRENEURIAT</span></button>
+        <button class="scene-hit hit-nav-profile" aria-label="Profil" onclick="showView('profile')"><span>PROFIL</span></button>
+        <button class="scene-hit hit-nav-rewards" aria-label="Progression et récompenses" onclick="showView('profile')"><span>RÉCOMPENSES</span></button>
+        <button class="scene-hit hit-nav-leaderboard" aria-label="Voir mes niveaux" onclick="showView('levels')"><span>NIVEAUX</span></button>
+        <button class="scene-hit hit-nav-events" aria-label="Règles du jeu" onclick="showView('help')"><span>AIDE</span></button>
+        <button class="scene-hit hit-nav-shop" aria-label="Revoir la bande annonce" onclick="location.href='index.html?replay=1'"><span>INTRO</span></button>
+        <div class="live-score" aria-live="polite">⭐ <strong id="accueilLiveScore">0</strong> pts · 🏆 <strong id="accueilLiveLevels">0/7</strong></div>
+        <a class="replay-intro" href="index.html?replay=1" aria-label="Revoir la bande-annonce">🎬 Revoir l'intro</a>
+      </div>
+      <!-- A mobile-first layout preserves readability instead of shrinking a 16:9 poster. -->
+      <div class="mobile-comic-home">
+        <div class="comic-hero">
+          <div class="comic-sticker sticker-left">💡</div><div class="comic-sticker sticker-right">🚀</div>
+          <div class="comic-tag">🎮 OFPPT · PROGRAMME D’INNOVATION ENTREPRENEURIALE</div>
+          <div class="comic-main-logo"><span>PIE</span><em>CHALLENGE!</em></div>
+          <p class="comic-subtitle">IMAGINE · INNOVE · ENTREPRENDS</p>
+          <button class="comic-play" onclick="showView('levels')">▶ PLAY!</button>
+          <div class="hero-secondary-actions"><button onclick="showView('help')">❔ Règles</button><a href="index.html?replay=1">🎬 Intro</a></div>
+        </div>
+        <div class="comic-pick-title">CHOISIS TON DÉFI !</div>
+        <div class="features comic-features">
+          <button class="feature-card comic-feature orange" onclick="showView('levels')"><span>💡</span><h3>CRÉATIVITÉ</h3><p>Génère des idées innovantes !</p></button>
+          <button class="feature-card comic-feature purple" onclick="showView('levels')"><span>🚀</span><h3>INNOVATION</h3><p>Transforme tes idées en solutions !</p></button>
+          <button class="feature-card comic-feature aqua" onclick="showView('levels')"><span>🏆</span><h3>ENTREPRENEURIAT</h3><p>Construis ton projet !</p></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEVELS -->
+    <section id="levelsView" class="view">
+        <div class="section-heading">
+            <h1>Choisis ton niveau</h1>
+            <p>Termine les trois questions pour débloquer le niveau suivant.</p>
+        </div>
+
+        <div id="levelsContainer" class="levels-grid"></div>
+
+        <button class="secondary-btn" onclick="showView('home')">
+            ← Retour
+        </button>
+    </section>
+
+    <!-- GAME -->
+    <section id="gameView" class="view">
+        <div class="game-top">
+            <button class="secondary-btn" onclick="showView('levels')">
+                ← Niveaux
+            </button>
+
+            <div class="game-progress">
+                <span id="levelTitle">Niveau 1</span>
+                <span id="questionNumber">Question 1/3</span>
+            </div>
+        </div>
+
+        <div class="progress-track">
+            <div id="progressBar" class="progress-fill"></div>
+        </div>
+
+        <div class="question-card">
+            <div id="questionType" class="question-badge">DÉFI</div>
+
+            <h2 id="questionTitle">Question</h2>
+
+            <p id="questionDescription"></p>
+
+            <div id="questionContent" class="question-content"></div>
+
+            <div id="answerArea" class="answer-area"></div>
+
+            <p id="feedback" class="feedback"></p>
+
+            <div class="game-actions">
+                <button id="hintBtn" class="hint-btn" onclick="useHint()">
+                    💡 Indice (-20 pts)
+                </button>
+
+                <button id="checkBtn" class="primary-btn" onclick="checkAnswer()">
+                    Vérifier
+                </button>
+
+                <button id="nextBtn" class="primary-btn hidden" onclick="nextQuestion()">
+                    Question suivante →
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section id="resultsView" class="view">
+        <div class="result-card">
+            <div class="result-icon">🎉</div>
+            <h1 id="resultTitle">Niveau terminé !</h1>
+            <p id="resultMessage">Bravo pour tes efforts.</p>
+
+            <div class="result-score">
+                ⭐ <strong id="resultScore">0</strong> points
+            </div>
+
+            <button id="nextLevelBtn" class="primary-btn" onclick="goNextLevel()">
+                Niveau suivant →
+            </button>
+
+            <button class="secondary-btn" onclick="showView('levels')">
+                Voir les niveaux
+            </button>
+        </div>
+    </section>
+
+    <!-- PROFILE -->
+    <section id="profileView" class="view">
+        <div class="section-heading">
+            <h1>Mon profil</h1>
+            <p>Consulte ta progression dans PIE Challenge.</p>
+        </div>
+
+        <div class="profile-card">
+            <div class="profile-avatar">👨‍🎓</div>
+            <h2>Joueur</h2>
+
+            <div class="profile-stats">
+                <div>
+                    <strong id="profileScore">0</strong>
+                    <span>Points</span>
+                </div>
+
+                <div>
+                    <strong id="profileLevels">0/7</strong>
+                    <span>Niveaux terminés</span>
+                </div>
+
+                <div>
+                    <strong id="profileQuestions">0/21</strong>
+                    <span>Bonnes réponses</span>
+                </div>
+            </div>
+
+            <button class="secondary-btn" onclick="resetProgress()">
+                Réinitialiser ma progression
+            </button>
+        </div>
+    </section>
+
+    <!-- HELP -->
+
+    <!-- HELP -->
+    <section id="helpView" class="view">
+
+        <div class="section-heading">
+            <h1>Comment jouer ?</h1>
+            <p>Règles du jeu et équipe du projet</p>
+        </div>
+
+        <div class="help-card">
+            <h2>📜 Règles du jeu</h2>
+
+            <p>🎯 Le jeu contient 7 niveaux.</p>
+            <p>🧩 Chaque niveau contient 3 questions.</p>
+            <p>⭐ Une bonne réponse rapporte 100 points.</p>
+            <p>💡 Un indice coûte 20 points.</p>
+            <p>🔓 Termine les trois questions pour débloquer le niveau suivant.</p>
+        </div>
+
+        <div class="help-card project-team">
+            <h2>👨‍💻 Équipe du projet</h2>
+
+            <div class="team-role">
+                <h3>🌐 HTML</h3>
+                <p>Omar • Yassine</p>
+            </div>
+
+            <div class="team-role">
+                <h3>🎨 CSS</h3>
+                <p>Ziyad • Adnane</p>
+            </div>
+
+            <div class="team-role">
+                <h3>⚙️ JavaScript</h3>
+                <p>Adnane • Walid</p>
+            </div>
+
+            <div class="team-role project-leader">
+                <h3>👑 Chef de projet</h3>
+                <p>Walid</p>
+            </div>
+        </div>
+
+    </section>
+
+
+</main>
+
+<footer class="bottom-nav">
+    <button onclick="showView('home')">🏠<span>Accueil</span></button>
+    <button onclick="showView('levels')">🎮<span>Niveaux</span></button>
+    <button onclick="showView('profile')">👤<span>Profil</span></button>
+    <button onclick="showView('help')">❔<span>Aide</span></button>
+</footer>
+
+<script src="js/questions.js"></script>
+<script src="js/app.js"></script>
+<script src="js/accueil.js"></script>
+<script src="js/pie-feedback.js"></script>
+
+</body>
+</html>

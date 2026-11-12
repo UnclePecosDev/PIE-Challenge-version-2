@@ -1,0 +1,89 @@
+/* PIE Magic Examination (inside the iframe) — same comic style */
+:root { color-scheme: light; }
+body {
+  background: #f4fbff !important;
+  color: #13233b !important;
+  padding: clamp(7px,2vw,17px) !important;
+  font-family: 'Nunito',system-ui,sans-serif !important;
+}
+.wrap {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 780px !important;
+  margin: 0 auto !important;
+  padding: clamp(17px,3vw,30px) !important;
+  background: #fffefa !important;
+  border: 4px solid #111b35 !important;
+  border-radius: 23px !important;
+  box-shadow: 6px 7px 0 #111b35 !important;
+}
+h1 { color: #e82151 !important; font-size: clamp(31px,5vw,46px) !important; }
+small { color: #244966 !important; font-weight: 900 !important; font-size: 13px !important; }
+.counter {
+  display: inline-block !important;
+  width: 100% !important;
+  padding: 6px !important;
+  color: #0b5581 !important;
+  font-weight: 900 !important;
+}
+.mission {
+  color: #142840 !important;
+  background: #fff0b0 !important;
+  border: 3px solid #111a34 !important;
+  border-radius: 14px !important;
+  font-size: clamp(15px,2vw,19px) !important;
+  line-height: 1.45 !important;
+}
+.answer {
+  min-height: 103px !important;
+  background: #e8f7ff !important;
+  color: #194761 !important;
+  border: 3px dashed #1084be !important;
+  border-radius: 16px !important;
+  padding: 14px !important;
+  font-weight: 800 !important;
+}
+.items {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 720px !important;
+  margin: 17px auto !important;
+  padding: 16px 9px !important;
+  background: #f7fbff !important;
+  border: 2px solid #b5dfee !important;
+  border-radius: 17px !important;
+  gap: 9px !important;
+}
+.token {
+  min-height: 48px !important;
+  padding: 10px 13px !important;
+  border: 3px solid #111a34 !important;
+  border-radius: 11px !important;
+  color: #112e47 !important;
+  background: linear-gradient(#91e6fa,#43b8e9) !important;
+  font-size: clamp(15px,2vw,19px) !important;
+  font-weight: 900 !important;
+  box-shadow: 0 3px #111a34 !important;
+}
+.items .token:nth-child(3n+2) { background: linear-gradient(#ffe877,#ffc732) !important; }
+.items .token:nth-child(3n) { background: linear-gradient(#b5f5ad,#5bd972) !important; }
+.answer .token { background: #ffe177 !important; }
+.token[disabled] { opacity: .25 !important; box-shadow: none !important; }
+.foot { display: flex !important; justify-content: center !important; flex-wrap: wrap !important; gap: 10px !important; }
+button.action {
+  padding: 13px 18px !important;
+  margin: 4px !important;
+  border: 3px solid #111a34 !important;
+  border-radius: 12px !important;
+  font-size: 16px !important;
+  box-shadow: 0 4px #111a34 !important;
+}
+button.action.secondary { background: #ffdd2f !important; color: #14233c !important; }
+button.action:not(.secondary) { background: #e6224d !important; color: white !important; }
+.feedback { color: #bb2445 !important; font-size: 16px !important; }
+@media (max-width:600px) {
+  .wrap { padding: 16px 10px !important; }
+  .items { padding: 10px 5px !important; }
+  .token { padding: 8px 10px !important; font-size: 14px !important; min-height: 43px !important; }
+  button.action { padding: 11px 12px !important; }
+}

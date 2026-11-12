@@ -1,0 +1,34 @@
+/* Level 1 question 2: entrepreneur portraits as a cinematic rotating backdrop. */
+#gameView.has-entrepreneur-backdrop { position: relative; isolation: isolate; }
+#gameView .entrepreneur-backdrop {
+  position: absolute; inset: -20px -3vw -28px; overflow:hidden; border-radius: 18px;
+  border: 4px solid #141529; box-shadow: 7px 9px 0 #141529; z-index: -1;
+  background: #072763; pointer-events:none;
+}
+#gameView .entrepreneur-backdrop-slide {
+  position:absolute; inset:0; background-size:cover; background-position: center 35%;
+  opacity:0; animation:entrepreneurPortraitCycle 40s linear infinite;
+  filter: saturate(1.15); transform:scale(1.04);
+}
+@keyframes entrepreneurPortraitCycle {
+  0%, 11.6% { opacity:1; transform: scale(1.04) }
+  12.5%, 99.99% { opacity:0; transform:scale(1.10) }
+}
+#gameView .entrepreneur-backdrop-shade {
+  position:absolute;inset:0; background:linear-gradient(90deg,rgba(3,12,38,.70),rgba(4,14,37,.61) 55%,rgba(3,11,38,.73));
+}
+#gameView.has-entrepreneur-backdrop .question-card {
+  background:rgba(250,253,255,.93);backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+#gameView.has-entrepreneur-backdrop .game-progress {background:rgba(255,255,255,.94)}
+#gameView.has-entrepreneur-backdrop .game-top>.secondary-btn {background:#ffdd29}
+#gameView.has-entrepreneur-backdrop .progress-track {box-shadow:0 3px 5px #020a2488}
+@media(max-width:680px){
+ #gameView .entrepreneur-backdrop {inset:-8px -6px -18px}
+ #gameView.has-entrepreneur-backdrop .question-card {background:rgba(252,254,255,.94)}
+}
+@media(prefers-reduced-motion:reduce){
+ #gameView .entrepreneur-backdrop-slide{animation:none;opacity:0}
+ #gameView .entrepreneur-backdrop-slide:first-child{opacity:1}
+}

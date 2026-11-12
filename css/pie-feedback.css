@@ -1,0 +1,86 @@
+/* PIE CHALLENGE | Jeff Bezos reaction, audio control and level victory */
+.pie-sound-toggle {
+  position: fixed; left: 14px; bottom: 82px; z-index: 9000;
+  border: 3px solid #11182d; border-radius: 13px; background: #ffdf27;
+  box-shadow: 4px 5px 0 #11182d; color: #11182d; padding: 10px 15px;
+  font: 900 14px/1.2 system-ui, sans-serif; cursor: pointer;
+}
+.pie-sound-toggle:focus-visible, .pie-victory button:focus-visible {outline: 4px solid #21bafa; outline-offset: 4px;}
+.pie-mascot-popup {
+  position: fixed; right: 16px; bottom: 82px; display: flex; align-items: center;
+  gap: 12px; z-index: 10020; pointer-events: none;
+  transform: translateX(calc(100% + 30px));
+  transition: transform .4s cubic-bezier(.22,.87,.28,1.25);
+  max-width: calc(100vw - 25px);
+}
+.pie-mascot-popup.show {transform: translateX(0);}
+.pie-mascot-bubble {
+  position: relative; color: #15522c; background: #d9f1df;
+  border: 4px solid #1a5e36; border-radius: 18px;
+  box-shadow: 6px 6px 0 #259754;
+  max-width: 275px; padding: 14px 17px;
+  font: 900 17px/1.35 system-ui,sans-serif; text-align: center;
+}
+.pie-mascot-bubble::after {content: ""; position: absolute; right: -18px; top: 50%; transform: translateY(-50%);
+  border: 9px solid transparent; border-left-color: #1a5e36;}
+.pie-mascot-popup.wrong .pie-mascot-bubble {
+  background: #fce0e3; color: #802a36; border-color: #8b2e3b;
+  box-shadow: 6px 6px 0 #d43b55;
+}
+.pie-mascot-popup.wrong .pie-mascot-bubble::after {border-left-color: #8b2e3b;}
+.pie-mascot-face { width: 125px; height: 133px; object-fit: contain;
+  filter: drop-shadow(2px 3px 0 #171528); }
+.pie-mascot-popup.correct .pie-mascot-face {animation: pie-head-happy .44s ease-in-out 2 alternate;}
+.pie-mascot-popup.wrong .pie-mascot-face {animation: pie-head-sad .2s ease-in-out 3;}
+@keyframes pie-head-happy {to {transform: translateY(-11px) rotate(-6deg)}}
+@keyframes pie-head-sad {25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+/* Level completion: full-screen comic celebration, no fabricated coins or gems. */
+.pie-victory {
+  position: fixed; inset: 0; z-index: 11000; display: grid; place-items: center;
+  overflow-y: auto; padding: 30px 15px 85px; opacity: 0; visibility: hidden;
+  pointer-events: none; transition: opacity .3s ease, visibility .3s ease;
+  background: linear-gradient(#081e61a8,#05172ccf), url('../images/level1-bg-q1.webp') center/cover no-repeat;
+}
+.pie-victory.active {opacity: 1; visibility: visible; pointer-events: auto;}
+.pie-victory-board { width: min(100%,580px); text-align: center; position:relative;
+  border: 6px solid #111629; border-radius: 28px; padding: clamp(20px,4vw,34px);
+  background: #fffefb; color: #0c2645; box-shadow: 9px 12px 0 #050a16,0 0 35px #ffe24b66;
+  transform: scale(.83) rotate(-4deg); transition: transform .48s cubic-bezier(.18,.87,.31,1.32);
+}
+.pie-victory.active .pie-victory-board {transform: scale(1) rotate(0);}
+.pie-victory-tag {display: inline-block; background: #ffe33d; color: #121a31;
+  border: 3px solid #15152b; box-shadow: 4px 4px 0 #15152b; border-radius: 12px;
+  padding: 7px 19px; font: 900 15px system-ui,sans-serif; transform:rotate(-2deg);
+}
+.pie-victory-title {margin: 19px 0 8px; font: 900 clamp(32px,6vw,56px)/1.04 Impact,'Arial Black',system-ui,sans-serif;
+  color: #ef2854; -webkit-text-stroke: 1px #12172a; text-shadow: 3px 4px 0 #ffce2b;}
+.pie-victory-stars {font-size:clamp(28px,6vw,46px);letter-spacing:7px; margin: 10px 0;
+  text-shadow: 2px 3px 0 #11182c; animation:pie-stars .75s ease-out both;}
+@keyframes pie-stars {from{transform:scale(.3);opacity:0}to{transform:scale(1);opacity:1}}
+.pie-victory-level {font: 900 20px/1.3 system-ui,sans-serif; margin: 10px 0;}
+.pie-victory-message {border:3px solid #142846; background: #eff9ff; border-radius:15px;
+  font:800 16px/1.55 system-ui,sans-serif; padding:14px;margin:14px 0;}
+.pie-victory-score {display: inline-block; border-radius:12px; background:#142d50; color:#ffdf35;
+  padding: 10px 20px; font:900 20px system-ui,sans-serif; margin-bottom: 15px;}
+.pie-victory-actions {display:flex;flex-wrap:wrap;gap:13px;justify-content:center;align-items:center;margin-top:13px;}
+.pie-victory-actions button {padding:11px 19px;border:3px solid #11182c;border-radius:13px;
+  font:900 18px system-ui,sans-serif;box-shadow:3px 4px 0 #11182c;cursor:pointer;}
+#pieVictoryNext {background:linear-gradient(#ffde30,#ffb917);color:#13192c;}
+#pieVictoryClose {background:#164a74;color:white;}
+.pie-confetti {position:fixed;top:-26px;z-index:11020;pointer-events:none;width:12px;height:18px;
+  animation:pie-fall var(--duration,2s) linear forwards;}
+@keyframes pie-fall {to{transform:translate3d(var(--drift,0px),110vh,0) rotate(740deg);opacity:0}}
+@media(max-width:620px) {
+ .pie-mascot-popup {right:7px;bottom:90px;gap:7px;}
+ .pie-mascot-face {width:83px;height:92px;}
+ .pie-mascot-bubble {font-size:13px;max-width:205px;padding:9px 10px;border-width:3px;}
+ .pie-sound-toggle {left:8px;bottom:75px;padding:8px 11px;font-size:12px;}
+ .pie-victory-board {border-width:4px;padding:18px 12px;}
+ .pie-victory-actions button {font-size:15px;}
+}
+@media(prefers-reduced-motion:reduce) {
+ .pie-mascot-popup,.pie-mascot-face,.pie-victory,.pie-victory-board,.pie-victory-stars,.pie-confetti {
+  animation:none !important; transition:none !important;
+ }
+}
